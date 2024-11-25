@@ -1,12 +1,14 @@
 //	Class Sw1Wrapper automatically generated at 2024-11-24 13:58:31
 import '../QQHsm/QQHsmEngine.dart';
 import '../core/utilities/utils.dart';
+import '../interfaces/i_click.dart';
 
 class Sw1Wrapper {
 	final QQHsmEngine _engine;
+	final IClick _clicker;
 	static bool process = false;
 	Map<String, void Function()> lookupTable = <String, void Function()>{};
-	Sw1Wrapper (this._engine) {
+	Sw1Wrapper (this._engine, this._clicker) {
 		createWalker();
 	}
 
@@ -63,6 +65,7 @@ class Sw1Wrapper {
 		// }
 		Future.microtask(() {
 			turn('ON Entry');
+			_clicker.click();
 		});
 	}
 
@@ -84,6 +87,7 @@ class Sw1Wrapper {
 		// }
 		Future.microtask(() {
 			turn('OFF Entry');
+			_clicker.click();
 		});
 
 	}
@@ -99,7 +103,7 @@ class Sw1Wrapper {
 
 	void turn(String text) async {
 
-		await Future.delayed(const Duration(seconds: 2));
+		await Future.delayed(const Duration(seconds: 1));
 		print('******* TURN ******* [$text]');
 		//process = true;
 
@@ -108,8 +112,8 @@ class Sw1Wrapper {
 			print('******* TURN ******* EXIT');
 			return;
 		}
-
 		_engine.done('TURN');
+		//_clicker.click();
 	}
 
 	void done(String state, String event) {

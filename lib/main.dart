@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:qqhsmsw/interfaces/i_click.dart';
 import 'QQHsm/QQHsmEngine.dart';
 import 'interfaces/i_updater.dart';
 import 'scheme/sw1_wrapper.dart';
@@ -27,12 +28,13 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget implements IUpdater {
+class MyHomePage extends StatelessWidget implements IUpdater, IClick {
   final String title;
   final String _fileName = "assets/stateMachines/sw1_engine.json";
 
   late QQHsmEngine hsmEngine;
   late Sw1Wrapper hsmWrapper;
+  late FlatAdvancedRoundedSwitch flatSwitch;
 
   MyHomePage({super.key, required this.title});
 
@@ -62,7 +64,7 @@ class MyHomePage extends StatelessWidget implements IUpdater {
       backgroundColor: Colors.lightBlue,
     );
 
-    FlatAdvancedRoundedSwitch flatSwitch = FlatAdvancedRoundedSwitch(
+    /*FlatAdvancedRoundedSwitch*/ flatSwitch = FlatAdvancedRoundedSwitch(
         width: 32,
         height: 32,
         borderWidth: 0.5,
@@ -138,7 +140,7 @@ class MyHomePage extends StatelessWidget implements IUpdater {
         if (text.isNotEmpty) {
           hsmEngine = QQHsmEngine(this);
           hsmEngine.create(text);
-          hsmWrapper = Sw1Wrapper(hsmEngine);
+          hsmWrapper = Sw1Wrapper(hsmEngine, this);
           //actualEvents = hsmEngine.appEvents()!;
           //print('actualEvents->$actualEvents');
           //engineIsLoaded = true;
@@ -203,6 +205,11 @@ class MyHomePage extends StatelessWidget implements IUpdater {
   void transition(String state, String event) {
     print('transition [$state] -> $event');
     hsmWrapper.done(state, event);
+  }
+
+  @override
+  void click() {
+    flatSwitch.click();
   }
 
 }
