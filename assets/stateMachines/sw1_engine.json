@@ -1,0 +1,191 @@
+{
+  "initstate": "SWITCH",
+  "collection": {
+    "container": [
+      {
+        "state": "SWITCH",
+        "entity": {
+          "container": [
+            {
+              "key": 2,
+              "value": null
+            },
+            {
+              "key": 3,
+              "value": null
+            },
+            {
+              "key": 1,
+              "value": "IDLE"
+            }
+          ],
+          "superstate": null
+        }
+      },
+      {
+        "state": "IDLE",
+        "entity": {
+          "container": [
+            {
+              "key": 2,
+              "value": null
+            },
+            {
+              "key": 3,
+              "value": null
+            },
+            {
+              "key": 1,
+              "value": "OFF"
+            },
+            {
+              "key": 4,
+              "value": "SWITCH"
+            }
+          ],
+          "superstate": "SWITCH"
+        }
+      },
+      {
+        "state": "ON",
+        "entity": {
+          "container": [
+            {
+              "key": 2,
+              "value": null
+            },
+            {
+              "key": 3,
+              "value": null
+            },
+            {
+              "key": 5,
+              "value": "OFF"
+            }
+          ],
+          "superstate": "IDLE"
+        }
+      },
+      {
+        "state": "OFF",
+        "entity": {
+          "container": [
+            {
+              "key": 2,
+              "value": null
+            },
+            {
+              "key": 3,
+              "value": null
+            },
+            {
+              "key": 5,
+              "value": "ON"
+            }
+          ],
+          "superstate": "IDLE"
+        }
+      }
+    ]
+  },
+  "generator": {
+    "direct": [
+      {
+        "key": "Q_EMPTY_SIG",
+        "value": 0
+      },
+      {
+        "key": "Q_INIT_SIG",
+        "value": 1
+      },
+      {
+        "key": "Q_ENTRY_SIG",
+        "value": 2
+      },
+      {
+        "key": "Q_EXIT_SIG",
+        "value": 3
+      },
+      {
+        "key": "RESET",
+        "value": 4
+      },
+      {
+        "key": "TURN",
+        "value": 5
+      }
+    ],
+    "revert": [
+      {
+        "key": 0,
+        "value": "Q_EMPTY_SIG"
+      },
+      {
+        "key": 1,
+        "value": "Q_INIT_SIG"
+      },
+      {
+        "key": 2,
+        "value": "Q_ENTRY_SIG"
+      },
+      {
+        "key": 3,
+        "value": "Q_EXIT_SIG"
+      },
+      {
+        "key": 4,
+        "value": "RESET"
+      },
+      {
+        "key": 5,
+        "value": "TURN"
+      }
+    ]
+  },
+  "mediator": {
+    "table": [
+      {
+        "key": "Q_EMPTY_SIG",
+        "value": "Q_EMPTY"
+      },
+      {
+        "key": "Q_INIT_SIG",
+        "value": "Q_INIT"
+      },
+      {
+        "key": "Q_ENTRY_SIG",
+        "value": "Q_ENTRY"
+      },
+      {
+        "key": "Q_EXIT_SIG",
+        "value": "Q_EXIT"
+      },
+      {
+        "key": "RESET_SIG",
+        "value": "RESET"
+      },
+      {
+        "key": "TURN_SIG",
+        "value": "TURN"
+      },
+      {
+        "key": "INIT_SIG",
+        "value": "INIT"
+      }
+    ],
+    "connector": [
+      {
+        "key": 1,
+        "value": "RESET_SIG"
+      },
+      {
+        "key": 2,
+        "value": "TURN_SIG"
+      },
+      {
+        "key": 3,
+        "value": "INIT_SIG"
+      }
+    ]
+  }
+}
