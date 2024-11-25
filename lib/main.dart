@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:qqhsmsw/interfaces/i_click.dart';
 import 'QQHsm/QQHsmEngine.dart';
 import 'interfaces/i_switch.dart';
 import 'interfaces/i_updater.dart';
@@ -30,12 +29,14 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget implements IUpdater, ISwitch {
+
   final String title;
   final String _fileName = "assets/stateMachines/sw1_engine.json";
 
   late QQHsmEngine hsmEngine;
   late Sw1Wrapper hsmWrapper;
   late FlatAdvancedRoundedSwitch flatSwitch;
+  late FlatTextRoundedButton turnButton;
 
   MyHomePage({super.key, required this.title});
 
@@ -55,8 +56,17 @@ class MyHomePage extends StatelessWidget implements IUpdater, ISwitch {
               ),
             ],
           )),
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.purple, Colors.blueAccent],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+      ),
       leading: IconButton(
-        icon: const Icon(Icons.extension_outlined, color: Colors.white),
+        icon: const Icon(Icons.blur_on_sharp, color: Colors.white, size: 40),
         // Icon widget
         onPressed: () {
           // Add your onPressed logic here
@@ -65,20 +75,20 @@ class MyHomePage extends StatelessWidget implements IUpdater, ISwitch {
       backgroundColor: Colors.lightBlue,
     );
 
-    /*FlatAdvancedRoundedSwitch*/ flatSwitch = FlatAdvancedRoundedSwitch(
-        width: 32,
-        height: 32,
+    flatSwitch = FlatAdvancedRoundedSwitch(
+        width: 72,
+        height: 72,
         borderWidth: 0.5,
-        canvasFColor: Colors.blue,
-        canvasTColor: Colors.amberAccent,
+        canvasFColor: Colors.blueAccent,
+        canvasTColor: Colors.blueAccent,
         borderFColor: Colors.white30,
-        borderTColor: Colors.redAccent,
+        borderTColor: Colors.white,
         borderDColor: Colors.cyanAccent,
         borderUColor: Colors.cyan,
-        iconFColor: Colors.white,
-        iconTColor: Colors.red,
-        T: Icons.access_alarm,
-        F: Icons.access_time,
+        iconFColor: Colors.white30,
+        iconTColor: Colors.white,
+        T: Icons.blur_on_sharp,
+        F: Icons.blur_on_sharp,
         onDownAction: () {
         },
         onUpAction: () {
@@ -103,12 +113,13 @@ class MyHomePage extends StatelessWidget implements IUpdater, ISwitch {
       borderRadius: 8,
       onUpAction: () {
         done('RESET');
+        turnButton.enable();
       },
       onDownAction: () {
       },
     );
 
-    FlatTextRoundedButton turnButton = FlatTextRoundedButton(
+    turnButton = FlatTextRoundedButton(
       width: 36,
       height: 12,
       canvasColor: Colors.blueAccent,
@@ -126,7 +137,11 @@ class MyHomePage extends StatelessWidget implements IUpdater, ISwitch {
       borderWidth: 0.5,
       borderRadius: 8,
       onUpAction: () {
+        if (hsmWrapper.inLoop()) {
+          return;
+        }
         done('TURN');
+        turnButton.disable();
       },
       onDownAction: () {
       },
@@ -142,10 +157,6 @@ class MyHomePage extends StatelessWidget implements IUpdater, ISwitch {
           hsmEngine = QQHsmEngine(this);
           hsmEngine.create(text);
           hsmWrapper = Sw1Wrapper(hsmEngine, this);
-          //actualEvents = hsmEngine.appEvents()!;
-          //print('actualEvents->$actualEvents');
-          //engineIsLoaded = true;
-          //buttonBloc.add(AddButtonList(actualEvents));
         } else {
           print('Failed to loaded $_fileName');
           return;
@@ -161,7 +172,7 @@ class MyHomePage extends StatelessWidget implements IUpdater, ISwitch {
     });
 
     return Scaffold(
-        backgroundColor: Colors.white70,
+        backgroundColor: Colors.blueAccent,
         appBar: appBar,
         body: Align(
             alignment: Alignment.center,

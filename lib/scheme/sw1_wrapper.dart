@@ -1,17 +1,19 @@
 //	Class Sw1Wrapper automatically generated at 2024-11-24 13:58:31
 import '../QQHsm/QQHsmEngine.dart';
 import '../core/utilities/utils.dart';
-import '../interfaces/i_click.dart';
 import '../interfaces/i_switch.dart';
 
 class Sw1Wrapper {
 	final QQHsmEngine _engine;
-	//final IClick _clicker;
 	final ISwitch _clicker;
 	static bool process = false;
 	Map<String, void Function()> lookupTable = <String, void Function()>{};
 	Sw1Wrapper (this._engine, this._clicker) {
 		createWalker();
+	}
+
+	bool inLoop() {
+		return process;
 	}
 
 	void createWalker() {
