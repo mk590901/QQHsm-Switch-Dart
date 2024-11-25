@@ -71,6 +71,40 @@ class Up<T> extends Event<T> {
   }
 }
 
+class True<T> extends Event<T> {
+  T? _data;
+
+  True([this._data]);
+
+  @override
+  T? getData() {
+    return _data;
+  }
+
+  @override
+  True<T> setData([T? data]) {
+    _data = data;
+    return this;
+  }
+}
+
+class False<T> extends Event<T> {
+  T? _data;
+
+  False([this._data]);
+
+  @override
+  T? getData() {
+    return _data;
+  }
+
+  @override
+  False<T> setData([T? data]) {
+    _data = data;
+    return this;
+  }
+}
+
 class Enable<T> extends Event<T> {
   T? _data;
 

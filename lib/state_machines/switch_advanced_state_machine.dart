@@ -14,13 +14,17 @@ class SwitchAdvancedStateMachine extends BasicStateMachine {
     states_[SwitchAdvancedState.state_(SwitchAdvancedStates.off)] = State([
       Trans(Disable(),  SwitchAdvancedState.state_(SwitchAdvancedStates.disabled_off), OnDisableOff()),
       Trans(Reset(),    SwitchAdvancedState.state_(SwitchAdvancedStates.off), OnNothing()),
-      Trans(Down(),     SwitchAdvancedState.state_(SwitchAdvancedStates.off2on), OnDown())
+      Trans(Down(),     SwitchAdvancedState.state_(SwitchAdvancedStates.off2on), OnDown()),
+      Trans(False(),    SwitchAdvancedState.state_(SwitchAdvancedStates.off), OnNothing()),
+      Trans(True(),     SwitchAdvancedState.state_(SwitchAdvancedStates.on), OnNothing()),
     ]);
 
     states_[SwitchAdvancedState.state_(SwitchAdvancedStates.on)] = State([
       Trans(Disable(),  SwitchAdvancedState.state_(SwitchAdvancedStates.disabled_on), OnDisableOn()),
       Trans(Reset(),    SwitchAdvancedState.state_(SwitchAdvancedStates.off), OnNothing()),
-      Trans(Down(),     SwitchAdvancedState.state_(SwitchAdvancedStates.on2off), OnDown())
+      Trans(Down(),     SwitchAdvancedState.state_(SwitchAdvancedStates.on2off), OnDown()),
+      Trans(False(),    SwitchAdvancedState.state_(SwitchAdvancedStates.off), OnNothing()),
+      Trans(True(),     SwitchAdvancedState.state_(SwitchAdvancedStates.on), OnNothing()),
     ]);
 
     states_[SwitchAdvancedState.state_(SwitchAdvancedStates.disabled_off)] = State([

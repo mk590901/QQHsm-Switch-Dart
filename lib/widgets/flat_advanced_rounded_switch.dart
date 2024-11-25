@@ -70,6 +70,22 @@ class FlatAdvancedRoundedSwitch extends StatelessWidget implements IClick {
     gestureDetector.onTapUp?.call(TapUpDetails(kind: PointerDeviceKind.touch));
   }
 
+  void t() {
+    try {
+      switchBloc.add(True());
+    } catch (exception) {
+      debugPrint("******* reset error *******");
+    }
+  }
+
+  void f() {
+    try {
+      switchBloc.add(False());
+    } catch (exception) {
+      debugPrint("******* reset error *******");
+    }
+  }
+
   void reset() {
     try {
       switchBloc.add(Reset());
@@ -100,9 +116,7 @@ class FlatAdvancedRoundedSwitch extends StatelessWidget implements IClick {
     double? borderRadius_ = w_(borderRadius);
     double? borderWidth_ = w_(borderWidth);
     return BlocProvider<SwitchAdvancedBloc>(
-      //create: (_) => SwitchAdvancedBloc(SwitchAdvancedState(SwitchAdvancedStates.off)),
-      create: (_) {
-        //switchBloc = SwitchAdvancedBloc(SwitchAdvancedState(SwitchAdvancedStates.off));
+       create: (_) {
         return switchBloc;
       },
       child: BlocBuilder<SwitchAdvancedBloc, SwitchAdvancedState>(builder: (context, state) {

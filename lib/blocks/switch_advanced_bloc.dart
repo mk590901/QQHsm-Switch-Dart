@@ -25,6 +25,13 @@ class SwitchAdvancedBloc extends Bloc<Event, SwitchAdvancedState> {
     on<Disable>((event, emit) {
       done(event, emit);
     });
+    on<True>((event, emit) {
+      done(event, emit);
+    });
+    on<False>((event, emit) {
+      done(event, emit);
+    });
+
   }
 
   void done(Event event, Emitter<SwitchAdvancedState> emit) {

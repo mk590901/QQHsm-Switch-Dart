@@ -2,10 +2,12 @@
 import '../QQHsm/QQHsmEngine.dart';
 import '../core/utilities/utils.dart';
 import '../interfaces/i_click.dart';
+import '../interfaces/i_switch.dart';
 
 class Sw1Wrapper {
 	final QQHsmEngine _engine;
-	final IClick _clicker;
+	//final IClick _clicker;
+	final ISwitch _clicker;
 	static bool process = false;
 	Map<String, void Function()> lookupTable = <String, void Function()>{};
 	Sw1Wrapper (this._engine, this._clicker) {
@@ -65,7 +67,7 @@ class Sw1Wrapper {
 		// }
 		Future.microtask(() {
 			turn('ON Entry');
-			_clicker.click();
+			_clicker.t();
 		});
 	}
 
@@ -87,7 +89,7 @@ class Sw1Wrapper {
 		// }
 		Future.microtask(() {
 			turn('OFF Entry');
-			_clicker.click();
+			_clicker.f();
 		});
 
 	}

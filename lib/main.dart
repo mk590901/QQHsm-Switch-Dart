@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:qqhsmsw/interfaces/i_click.dart';
 import 'QQHsm/QQHsmEngine.dart';
+import 'interfaces/i_switch.dart';
 import 'interfaces/i_updater.dart';
 import 'scheme/sw1_wrapper.dart';
 import 'widgets/flat_advanced_rounded_switch.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget implements IUpdater, IClick {
+class MyHomePage extends StatelessWidget implements IUpdater, ISwitch {
   final String title;
   final String _fileName = "assets/stateMachines/sw1_engine.json";
 
@@ -208,8 +209,13 @@ class MyHomePage extends StatelessWidget implements IUpdater, IClick {
   }
 
   @override
-  void click() {
-    flatSwitch.click();
+  void t() {
+    flatSwitch.t();
+  }
+
+  @override
+  void f() {
+    flatSwitch.f();
   }
 
 }
