@@ -5,10 +5,10 @@ import '../interfaces/i_switch.dart';
 
 class Sw1Wrapper {
 	final QQHsmEngine _engine;
-	final ISwitch _clicker;
+	final ISwitch _switch;
 	static bool process = false;
 	Map<String, void Function()> lookupTable = <String, void Function()>{};
-	Sw1Wrapper (this._engine, this._clicker) {
+	Sw1Wrapper (this._engine, this._switch) {
 		createWalker();
 	}
 
@@ -63,13 +63,9 @@ class Sw1Wrapper {
 
 	void ONEntry() {
 		print("inside ONEntry [$process]");
-		// if (!process) {
-		// 	print("inside ONEntry exit");
-		// 	return;
-		// }
 		Future.microtask(() {
-			turn('ON Entry');
-			_clicker.t();
+			turn();
+			_switch.t();
 		});
 	}
 
@@ -78,20 +74,14 @@ class Sw1Wrapper {
 	}
 
 	void ONTurn() {
-		//process = true;
 		print("inside ONTurn");
 	}
 
 	void OFFEntry() {
 		print("inside OFFEntry [$process]");
-		// if (!process) {
-		// 	print("inside OFFEntry exit");
-		// 	//***process = true;
-		// 	return;
-		// }
 		Future.microtask(() {
-			turn('OFF Entry');
-			_clicker.f();
+			turn();
+			_switch.f();
 		});
 
 	}
@@ -105,19 +95,13 @@ class Sw1Wrapper {
 		print("inside OFFTurn -> [$process]");
 	}
 
-	void turn(String text) async {
+	void turn() async {
 
-		await Future.delayed(const Duration(seconds: 1));
-		print('******* TURN ******* [$text]');
-		//process = true;
-
-		print('******* TURN ******* [$process]');
+		await Future.delayed(const Duration(milliseconds: 500));
 		if (!process) {
-			print('******* TURN ******* EXIT');
 			return;
 		}
 		_engine.done('TURN');
-		//_clicker.click();
 	}
 
 	void done(String state, String event) {
