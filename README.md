@@ -1,16 +1,8 @@
 # QQHsm-Switch-Dart
+Sample of GUI app uses the HSM description as an external resource.
 
-A new Flutter project.
+## Introduction
+The project demonstrates the use of the approach proposed in https://github.com/mk590901/QQHsm-Dart in a regular GUI application.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## App description
+The application simulates the operation of a __switch__. It is controlled by two events: __TURN__ and __RESET__. Event __TURN__ switches the scheme from the __ON__ to __OFF__ state and back, and event __RESET__ resets the state machine to the __OFF__ state regardless of what state the state machine was in before.
